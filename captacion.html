@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicitar Cita Jurídica Prioritaria | Meryem Abogados · Meryem Oulad</title>
+  <meta name="description" content="Landing de captación oficial de Meryem Abogados (Meryem Oulad). Concierte su consulta jurídica en Extranjería, Penal, Familia o Laboral con respuesta en menos de 24h." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="bg-[#08080A] text-[#F5F5F7] antialiased selection:bg-[#D4AF37] selection:text-[#08080A]">
+
+  <!-- Barra Superior Discreta de los 3 Entornos -->
+  <div id="environment-topbar"></div>
+
+  <!-- CABECERA DE LANDING DE CAPTACIÓN (SIN MENÚ DE NAVEGACIÓN QUE DISTRAIGA AL USUARIO) -->
+  <header class="luxury-glass border-b border-[#D4AF37]/25 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div id="landing-logo-slot"></div>
+        <div>
+          <span class="block font-serif-legal text-lg sm:text-xl font-bold tracking-widest text-gold-gradient">
+            MERYEM ABOGADOS
+          </span>
+          <span class="block text-[11px] uppercase tracking-[0.2em] text-gray-400"
+                data-es="Dirección Letrada · Meryem Oulad"
+                data-ar="الإدارة القانونية · المحامية مريم أولاد">
+            Dirección Letrada · Meryem Oulad
+          </span>
+        </div>
+      </div>
+
+      <!-- Únicos botones de acción directa (Cero Fricción) -->
+      <div class="flex items-center gap-2.5">
+        <button type="button" data-track-action="clic_telefono" data-track-label="Cabecera Landing - Llamada Directa"
+                class="px-4 py-2.5 rounded-xl bg-[#15151B] border border-[#D4AF37] text-xs font-bold uppercase tracking-wider text-white hover:bg-[#D4AF37] hover:text-[#08080A] transition flex items-center gap-2">
+          <span>📞</span>
+          <span data-es="Llamar Ahora" data-ar="اتصل الآن">Llamar Ahora</span>
+        </button>
+        <button type="button" data-track-action="clic_whatsapp" data-track-label="Cabecera Landing - WhatsApp"
+                class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold uppercase tracking-wider text-white transition flex items-center gap-2">
+          <span>💬</span>
+          <span>WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-enter">
+    <!-- SECCIÓN CENTRAL DE CONVERSIÓN DIRECTA -->
+    <section class="py-12 lg:py-20 border-b border-[#D4AF37]/20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <!-- Selector de Campaña Activa (Google Ads / Meta Ads / Ficha Google) -->
+        <div class="mb-8 flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-[#101015] border border-[#D4AF37]/25">
+          <div class="flex items-center gap-2 text-xs text-gray-300">
+            <span class="w-2 h-2 rounded-full bg-[#D4AF37]"></span>
+            <span class="font-semibold text-[#D4AF37]">Especialidad de la Campaña:</span>
+            <span class="text-gray-400 hidden sm:inline">(Adapta el titular persuasivo y preselecciona el área en el formulario)</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="campaign-selector">
+            <button type="button" data-campaign="Extranjería" class="px-3 py-1 rounded-lg bg-[#D4AF37] text-[#08080A] text-xs font-bold">
+              Extranjería
+            </button>
+            <button type="button" data-campaign="Derecho Penal" class="px-3 py-1 rounded-lg bg-[#16161E] text-gray-300 hover:text-white text-xs border border-white/10">
+              Derecho Penal
+            </button>
+            <button type="button" data-campaign="Derecho de Familia" class="px-3 py-1 rounded-lg bg-[#16161E] text-gray-300 hover:text-white text-xs border border-white/10">
+              Derecho de Familia
+            </button>
+            <button type="button" data-campaign="Derecho Laboral" class="px-3 py-1 rounded-lg bg-[#16161E] text-gray-300 hover:text-white text-xs border border-white/10">
+              Derecho Laboral
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+          <!-- Columna Izquierda: Argumentario Persuasivo sin Distracciones -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#15151B] border border-[#D4AF37]/40 text-xs text-[#D4AF37] font-semibold">
+              <span>⚡</span>
+              <span id="landing-badge"
+                    data-es="Atención Prioritaria · Respuesta en menos de 24 horas"
+                    data-ar="عناية ذات أولوية · رد خلال أقل من 24 ساعة">
+                Atención Prioritaria · Respuesta en menos de 24 horas
+              </span>
+            </div>
+
+            <h1 id="landing-headline" class="font-serif-legal text-3xl sm:text-5xl font-bold text-white leading-tight"
+                data-es="¿Necesita una abogada especialista en <span class='text-gold-gradient'>Extranjería, Penal, Familia o Laboral</span> con trato directo hoy mismo?"
+                data-ar="هل تحتاجون إلى محامية متخصصة في <span class='text-gold-gradient'>قانون الهجرة، الجنائي، الأسرة أو العمل</span> بتعامل شخصي مباشر اليوم؟">
+              ¿Necesita una abogada especialista en <span class="text-gold-gradient">Extranjería, Penal, Familia o Laboral</span> con trato directo hoy mismo?
+            </h1>
+
+            <p id="landing-subheadline" class="text-base sm:text-lg text-gray-300 leading-relaxed"
+               data-es="No deje que un plazo administrativo o judicial venza por falta de orientación. En <strong>Meryem Abogados</strong>, la letrada <strong>Meryem Oulad</strong> revisa personalmente su consulta y le contacta en menos de 24 horas para trazar la estrategia legal adecuada."
+               data-ar="لا تدعوا أي أجل إداري أو قضائي ينقضي دون توجيه قانوني سليم. في <strong>مكتب مريم للمحاماة</strong>، تقوم المحامية <strong>مريم أولاد</strong> بمراجعة استشارتكم شخصياً والتواصل معكم خلال أقل من 24 ساعة.">
+              No deje que un plazo administrativo o judicial venza por falta de orientación. En <strong>Meryem Abogados</strong>, la letrada <strong>Meryem Oulad</strong> revisa personalmente su consulta y le contacta en menos de 24 horas para trazar la estrategia legal adecuada.
+            </p>
+
+            <!-- Puntos de Confianza Reales (Cero datos inventados) -->
+            <div class="space-y-3.5 pt-2">
+              <div class="flex items-start gap-3.5 p-4 rounded-xl bg-[#101014] border border-[#D4AF37]/25">
+                <span class="text-[#D4AF37] text-lg font-bold">✓</span>
+                <div>
+                  <h2 class="text-sm font-bold text-white">Trato directo con la letrada Meryem Oulad</h2>
+                  <p class="text-xs text-gray-400 mt-0.5">
+                    Sin intermediarios comerciales: su asunto es valorado directamente por la abogada titular del despacho.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3.5 p-4 rounded-xl bg-[#101014] border border-[#D4AF37]/25">
+                <span class="text-[#D4AF37] text-lg font-bold">✓</span>
+                <div>
+                  <h2 class="text-sm font-bold text-white">Registro automático de su expediente (&lt; 24 horas)</h2>
+                  <p class="text-xs text-gray-400 mt-0.5">
+                    Al enviar este formulario breve, su consulta genera un código de expediente único y activa una alerta de contacto inmediato.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3.5 p-4 rounded-xl bg-[#101014] border border-[#D4AF37]/25">
+                <span class="text-[#D4AF37] text-lg font-bold">✓</span>
+                <div>
+                  <h2 class="text-sm font-bold text-white">Atención Bilingüe en Español y Árabe (ES | العربية)</h2>
+                  <p class="text-xs text-gray-400 mt-0.5">
+                    Explicación clara de cada trámite, documentación necesaria y presupuesto mediante hoja de encargo profesional.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel de Medición de Campaña en Tiempo Real -->
+            <div class="p-5 rounded-2xl bg-[#0D0D12] border border-white/10 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs uppercase tracking-wider text-[#D4AF37] font-bold">
+                  📊 Medición Instalada en Tiempo Real (Google Ads / Meta Ads)
+                </span>
+                <a href="crm.html" class="text-xs text-[#D4AF37] hover:underline font-semibold">Ver en CRM →</a>
+              </div>
+              <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="p-3 rounded-xl bg-[#14141C] border border-white/5">
+                  <span class="block text-xl font-bold text-white" id="landing-stat-forms">0</span>
+                  <span class="text-[11px] text-gray-400">Formularios Landing</span>
+                </div>
+                <div class="p-3 rounded-xl bg-[#14141C] border border-white/5">
+                  <span class="block text-xl font-bold text-emerald-400" id="landing-stat-wa">0</span>
+                  <span class="text-[11px] text-gray-400">Clics en WhatsApp</span>
+                </div>
+                <div class="p-3 rounded-xl bg-[#14141C] border border-white/5">
+                  <span class="block text-xl font-bold text-[#D4AF37]" id="landing-stat-tel">0</span>
+                  <span class="text-[11px] text-gray-400">Clics en Teléfono</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Formulario Breve de Alta Conversión Conectado al CRM -->
+          <div class="lg:col-span-5">
+            <div class="luxury-card rounded-2xl p-6 sm:p-8 border-gold-glow shadow-2xl">
+              <div class="text-center pb-5 mb-5 border-b border-white/10">
+                <span class="inline-block px-3 py-1 rounded-full bg-[#D4AF37]/20 text-[#FFF5C0] text-[11px] font-bold uppercase tracking-wider mb-2">
+                  Respuesta Garantizada &lt; 24 Horas
+                </span>
+                <h2 class="font-serif-legal text-2xl font-bold text-white"
+                    data-es="Solicite que le Llamemos Hoy"
+                    data-ar="اطلب الاتصال بك اليوم">
+                  Solicite que le Llamemos Hoy
+                </h2>
+                <p class="text-xs text-gray-400 mt-1">
+                  Deje sus datos en menos de 30 segundos y la letrada Meryem Oulad se pondrá en contacto con usted.
+                </p>
+              </div>
+
+              <form id="landing-capture-form" data-crm-form data-crm-origen="Landing de Captación" class="space-y-4">
+                <input type="hidden" name="origen" value="Landing de Captación" />
+
+                <div>
+                  <label class="block text-xs text-gray-200 mb-1.5 font-semibold">1. Su Nombre y Apellidos *</label>
+                  <input type="text" name="nombre_completo" required class="luxury-input"
+                         placeholder="Escriba su nombre completo" />
+                </div>
+
+                <div>
+                  <label class="block text-xs text-gray-200 mb-1.5 font-semibold">2. Su Teléfono o WhatsApp *</label>
+                  <input type="tel" name="telefono" required class="luxury-input"
+                         placeholder="+34 600 00 00 00" />
+                </div>
+
+                <div>
+                  <label class="block text-xs text-gray-200 mb-1.5 font-semibold">3. Especialidad de su Consulta *</label>
+                  <select id="landing-area-select" name="area_practica" class="luxury-input">
+                    <option value="Extranjería">Extranjería (Arraigo, Nacionalidad, NIE, Recursos)</option>
+                    <option value="Derecho Penal">Derecho Penal (Citación Judicial, Defensa, Juicio Rápido)</option>
+                    <option value="Derecho de Familia">Derecho de Familia (Divorcio, Custodia, Convenio)</option>
+                    <option value="Derecho Laboral">Derecho Laboral (Despido, Finiquito, Reclamación)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs text-gray-200 mb-1.5 font-semibold">4. Breve resumen de su caso (Opcional)</label>
+                  <textarea name="mensaje" rows="2" class="luxury-input"
+                            placeholder="Indique brevemente en qué podemos ayudarle..."></textarea>
+                </div>
+
+                <div class="flex items-start gap-2 text-[11px] text-gray-400">
+                  <input type="checkbox" required checked class="mt-0.5 accent-[#D4AF37]" />
+                  <span data-es="Acepto la <a href='textos-legales.html#privacidad' class='text-[#D4AF37] underline'>Política de Privacidad (RGPD)</a> para que Meryem Abogados atienda mi solicitud."
+                        data-ar="أوافق على <a href='textos-legales.html#privacidad' class='text-[#D4AF37] underline'>سياسة الخصوصية وحماية البيانات (RGPD)</a> لكي يتولى مكتب مريم للمحاماة دراسة طلبي.">
+                    Acepto la <a href="textos-legales.html#privacidad" class="text-[#D4AF37] underline">Política de Privacidad (RGPD)</a> para que Meryem Abogados atienda mi solicitud.
+                  </span>
+                </div>
+
+                <button type="submit" class="w-full bg-gold-gradient py-4 rounded-xl font-bold text-sm uppercase tracking-wider shadow-xl transition">
+                  Solicitar Primera Valoración Ahora →
+                </button>
+
+                <div data-crm-feedback class="hidden"></div>
+              </form>
+
+              <div class="mt-5 pt-4 border-t border-white/10 text-center space-y-2">
+                <p class="text-[11px] text-gray-400">¿Prefiere hablar directamente en este momento?</p>
+                <div class="grid grid-cols-2 gap-2.5">
+                  <button type="button" data-track-action="clic_telefono" data-track-label="Formulario Landing - Llamar"
+                          class="py-2.5 px-3 rounded-lg bg-[#15151B] border border-[#D4AF37]/40 text-xs font-bold text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#08080A] transition">
+                    📞 Llamar al Despacho
+                  </button>
+                  <button type="button" data-track-action="clic_whatsapp" data-track-label="Formulario Landing - WhatsApp"
+                          class="py-2.5 px-3 rounded-lg bg-emerald-600/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 hover:bg-emerald-600 hover:text-white transition">
+                    💬 Abrir WhatsApp
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie Mínimo sin Fuga de Navegación -->
+  <footer class="py-8 bg-[#050507] border-t border-white/10 text-center text-xs text-gray-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p data-es="© 2026 Meryem Abogados · Dirección Letrada: Meryem Oulad. Secreto profesional garantizado."
+         data-ar="© 2026 مكتب مريم للمحاماة · المحامية مريم أولاد. السر المهني مضمون.">
+        © 2026 Meryem Abogados · Dirección Letrada: Meryem Oulad. Secreto profesional garantizado.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="textos-legales.html" class="hover:text-[#D4AF37]"
+           data-es="Aviso Legal y Privacidad RGPD"
+           data-ar="الإشعار القانوني وسياسة الخصوصية">Aviso Legal y Privacidad RGPD</a>
+        <span>·</span>
+        <a href="index.html" class="text-[#D4AF37] hover:underline">Ir a la Web Corporativa Completa →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/crm-store.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoSlot = document.getElementById('landing-logo-slot');
+      if (logoSlot && window.MeryemLayout) {
+        logoSlot.innerHTML = window.MeryemLayout.obtenerEmblemaSVG('w-11 h-11');
+      }
+
+      let campanaActiva = null;
+
+      const COPY_CAMPANAS = {
+        'Extranjería': {
+          es: {
+            headline: '¿Necesita presentar su <span class="text-gold-gradient">Arraigo, Nacionalidad o Recurso de Extranjería</span> con plenas garantías?',
+            sub: 'En <strong>Meryem Abogados</strong>, la letrada <strong>Meryem Oulad</strong> revisa personalmente toda su documentación antes de presentarla para evitar requerimientos y demoras. Atención en Español y Árabe.'
+          },
+          ar: {
+            headline: 'هل تحتاجون إلى تقديم ملف <span class="text-gold-gradient">الإقامة (Arraigo)، الجنسية الإسبانية أو طعن الهجرة</span> بكامل الضمانات؟',
+            sub: 'في <strong>مكتب مريم للمحاماة</strong>، تقوم المحامية <strong>مريم أولاد</strong> بمراجعة جميع وثائقكم شخصياً قبل التقديم لتفادي أي نقص أو تأخير. خدمة باللغتين الإسبانية والعربية.'
+          }
+        },
+        'Derecho Penal': {
+          es: {
+            headline: '¿Ha recibido una <span class="text-gold-gradient">Citación Judicial o necesita Defensa Penal</span> inmediata?',
+            sub: 'No acuda a declarar sin haber preparado previamente su estrategia de defensa. La letrada <strong>Meryem Oulad</strong> estudia su expediente de forma urgente en menos de 24 horas.'
+          },
+          ar: {
+            headline: 'هل توصلتم بـ <span class="text-gold-gradient">استدعاء قضائي أو تحتاجون إلى دفاع جنائي</span> فوري؟',
+            sub: 'لا تمثلوا أمام القضاء دون تحضير مسبق لاستراتيجية دفاعكم. تقوم المحامية <strong>مريم أولاد</strong> بدراسة ملفكم بصفة استعجالية خلال أقل من 24 ساعة.'
+          }
+        },
+        'Derecho de Familia': {
+          es: {
+            headline: 'Asesoramiento cercano y firme en <span class="text-gold-gradient">Divorcios, Custodia y Convenio Regulador</span>',
+            sub: 'Proteja el bienestar de sus hijos y su tranquilidad patrimonial con el acompañamiento directo y confidencial de la letrada <strong>Meryem Oulad</strong>.'
+          },
+          ar: {
+            headline: 'استشارة قانونية رصينة في قضايا <span class="text-gold-gradient">الطلاق، الحضانة واتفاقيات التنظيم الأسري</span>',
+            sub: 'احموا مصلحة أبنائكم واستقراركم الأسري بمرافقة مباشرة وسرية من المحامية <strong>مريم أولاد</strong>.'
+          }
+        },
+        'Derecho Laboral': {
+          es: {
+            headline: '¿Le han comunicado un <span class="text-gold-gradient">Despido o le adeudan salarios</span>? Proteja su plazo de 20 días hábiles',
+            sub: 'Revisamos su carta de despido y finiquito de inmediato, calculamos su indemnización real y presentamos su papeleta de conciliación SMAC en plazo.'
+          },
+          ar: {
+            headline: 'هل تم إشعاركم بـ <span class="text-gold-gradient">الفصل من العمل أو لديكم رواتب عالقة</span>؟ احموا أجل 20 يوم عمل',
+            sub: 'نراجع خطاب الفصل والتصفية النهائية فوراً، نحسب التعويض القانوني المستحق ونقدم طلب التوفيق (SMAC) داخل الأجل القانوني.'
+          }
+        }
+      };
+
+      const selectArea = document.getElementById('landing-area-select');
+      const headlineEl = document.getElementById('landing-headline');
+      const subEl = document.getElementById('landing-subheadline');
+
+      function aplicarCopyCampana(area) {
+        if (!area || !COPY_CAMPANAS[area]) return;
+        const lang = window.MeryemLayout ? window.MeryemLayout.obtenerIdiomaActual() : 'es';
+        const textos = COPY_CAMPANAS[area][lang] || COPY_CAMPANAS[area].es;
+        headlineEl.setAttribute('data-es', COPY_CAMPANAS[area].es.headline);
+        headlineEl.setAttribute('data-ar', COPY_CAMPANAS[area].ar.headline);
+        subEl.setAttribute('data-es', COPY_CAMPANAS[area].es.sub);
+        subEl.setAttribute('data-ar', COPY_CAMPANAS[area].ar.sub);
+        headlineEl.innerHTML = textos.headline;
+        subEl.innerHTML = textos.sub;
+      }
+
+      document.querySelectorAll('[data-campaign]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          campanaActiva = btn.getAttribute('data-campaign');
+          document.querySelectorAll('[data-campaign]').forEach((b) => {
+            b.className = 'px-3 py-1 rounded-lg bg-[#16161E] text-gray-300 hover:text-white text-xs border border-white/10';
+          });
+          btn.className = 'px-3 py-1 rounded-lg bg-[#D4AF37] text-[#08080A] text-xs font-bold';
+
+          if (selectArea) selectArea.value = campanaActiva;
+          aplicarCopyCampana(campanaActiva);
+        });
+      });
+
+      window.addEventListener('meryem:idioma-cambiado', () => {
+        if (campanaActiva) aplicarCopyCampana(campanaActiva);
+      });
+
+      function renderLandingStats() {
+        if (!window.MeryemCRM) return;
+        const m = window.MeryemCRM.obtenerMetricas();
+        document.getElementById('landing-stat-forms').textContent = m.envios_landing;
+        document.getElementById('landing-stat-wa').textContent = m.clics_whatsapp;
+        document.getElementById('landing-stat-tel').textContent = m.clics_telefono;
+      }
+
+      renderLandingStats();
+      if (window.MeryemCRM) {
+        window.MeryemCRM.suscribir(renderLandingStats);
+      }
+    });
+  </script>
+</body>
+</html>
+

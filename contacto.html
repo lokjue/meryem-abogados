@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto y Cita Previa | Meryem Abogados · Meryem Oulad</title>
+  <meta name="description" content="Contacte con el despacho jurídico Meryem Abogados (Meryem Oulad). Formulario conectado en tiempo real al CRM del despacho con compromiso de respuesta en menos de 24 horas." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="bg-[#08080A] text-[#F5F5F7] antialiased">
+
+  <div id="environment-topbar"></div>
+  <div id="corporate-header"></div>
+
+  <main class="page-enter">
+    <section class="py-16 lg:py-20 bg-[#0B0B0F] border-b border-[#D4AF37]/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl space-y-4">
+          <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[#D4AF37] font-semibold">
+            <a href="index.html" class="hover:underline">Inicio</a>
+            <span>/</span>
+            <span data-es="Contacto y Cita Previa" data-ar="اتصل بنا وحجز موعد">Contacto y Cita Previa</span>
+          </div>
+          <h1 class="font-serif-legal text-3xl sm:text-5xl font-bold text-white"
+              data-es="Contacte con Meryem Abogados"
+              data-ar="تواصل مع مكتب مريم للمحاماة">
+            Contacte con Meryem Abogados
+          </h1>
+          <p class="text-base sm:text-lg text-gray-300 leading-relaxed"
+             data-es="Su consulta queda registrada automáticamente en nuestro sistema interno de expedientes, activando un aviso prioritario para que la letrada Meryem Oulad le responda en menos de 24 horas."
+             data-ar="يتم تسجيل استشارتكم تلقائياً في نظام إدارة الملفات الداخلي لدينا، مع تنبيه فوري لضمان رد المحامية مريم أولاد خلال أقل من 24 ساعة.">
+            Su consulta queda registrada automáticamente en nuestro sistema interno de expedientes, activando un aviso prioritario para que la letrada Meryem Oulad le responda en menos de 24 horas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 lg:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+          <!-- Columna Izquierda: Formulario Oficial Conectado al CRM -->
+          <div class="lg:col-span-7">
+            <div class="luxury-card rounded-2xl p-6 sm:p-10 border-gold-glow">
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-5 mb-6 border-b border-white/10">
+                <div>
+                  <span class="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">Entrada Directa al CRM</span>
+                  <h2 class="font-serif-legal text-2xl font-bold text-white mt-1"
+                      data-es="Formulario de Solicitud de Consulta"
+                      data-ar="نموذج طلب استشارة قانونية">
+                    Formulario de Solicitud de Consulta
+                  </h2>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
+                  ● Garantía de respuesta &lt; 24h
+                </span>
+              </div>
+
+              <form data-crm-form data-crm-origen="Web Corporativa" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs text-gray-300 mb-1.5 font-medium">Nombre y Apellidos *</label>
+                    <input type="text" name="nombre_completo" required class="luxury-input" placeholder="Su nombre completo" />
+                  </div>
+                  <div>
+                    <label class="block text-xs text-gray-300 mb-1.5 font-medium">Teléfono / WhatsApp *</label>
+                    <input type="tel" name="telefono" required class="luxury-input" placeholder="+34 600 00 00 00" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs text-gray-300 mb-1.5 font-medium">Correo Electrónico</label>
+                    <input type="email" name="email" class="luxury-input" placeholder="correo@ejemplo.com" />
+                  </div>
+                  <div>
+                    <label class="block text-xs text-gray-300 mb-1.5 font-medium">Área de Práctica Jurídica *</label>
+                    <select name="area_practica" class="luxury-input">
+                      <option value="Extranjería">Extranjería</option>
+                      <option value="Derecho Penal">Derecho Penal</option>
+                      <option value="Derecho de Familia">Derecho de Familia</option>
+                      <option value="Derecho Laboral">Derecho Laboral</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs text-gray-300 mb-1.5 font-medium"> ¿Cómo nos ha conocido?</label>
+                  <select name="origen" class="luxury-input">
+                    <option value="Web Corporativa">Búsqueda en Internet / Web Corporativa</option>
+                    <option value="Ficha de Google">Perfil de Empresa en Google (SEO Local)</option>
+                    <option value="Recomendación">Recomendación de otro cliente</option>
+                    <option value="Contacto Telefónico Directo">Contacto Telefónico Directo</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs text-gray-300 mb-1.5 font-medium">Descripción de su consulta *</label>
+                  <textarea name="mensaje" rows="4" required class="luxury-input"
+                            placeholder="Explique brevemente su situación y si cuenta con algún plazo o citación próxima..."></textarea>
+                </div>
+
+                <div class="flex items-start gap-2.5 text-xs text-gray-400">
+                  <input type="checkbox" required class="mt-1 accent-[#D4AF37]" />
+                  <span data-es="He leído y acepto el <a href='textos-legales.html#aviso-legal' class='text-[#D4AF37] underline'>Aviso Legal</a> y la <a href='textos-legales.html#privacidad' class='text-[#D4AF37] underline'>Política de Privacidad (RGPD)</a> de Meryem Abogados."
+                        data-ar="لقد قرأت وأوافق على <a href='textos-legales.html#aviso-legal' class='text-[#D4AF37] underline'>الإشعار القانوني</a> و<a href='textos-legales.html#privacidad' class='text-[#D4AF37] underline'>سياسة الخصوصية وحماية البيانات (RGPD)</a> الخاصة بمكتب مريم للمحاماة.">
+                    He leído y acepto el <a href="textos-legales.html#aviso-legal" class="text-[#D4AF37] underline">Aviso Legal</a> y la <a href="textos-legales.html#privacidad" class="text-[#D4AF37] underline">Política de Privacidad (RGPD)</a> de Meryem Abogados.
+                  </span>
+                </div>
+
+                <button type="submit" class="w-full bg-gold-gradient py-4 rounded-xl font-bold text-sm uppercase tracking-wider shadow-xl transition">
+                  Enviar Consulta y Generar Expediente en el CRM
+                </button>
+
+                <div data-crm-feedback class="hidden"></div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Canales Directos + Bloque de Perfil de Empresa en Google (SEO Local) -->
+          <div class="lg:col-span-5 space-y-6">
+
+            <!-- Tarjeta de Contacto Directo con Medición en Tiempo Real -->
+            <div class="luxury-card rounded-2xl p-6 space-y-4">
+              <h3 class="font-serif-legal text-lg font-bold text-white">Canales de Atención Directa</h3>
+              <p class="text-xs text-gray-400 leading-relaxed">
+                Si prefiere contactar por vía telefónica o WhatsApp, cada pulsación queda registrada en tiempo real en el panel de analítica del despacho.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" data-track-action="clic_telefono" data-track-label="Página Contacto - Llamada"
+                        class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#15151B] border border-[#D4AF37]/40 hover:bg-[#D4AF37] hover:text-[#08080A] text-xs font-bold uppercase tracking-wider transition">
+                  <span>📞</span>
+                  <span>Llamada Directa</span>
+                </button>
+                <button type="button" data-track-action="clic_whatsapp" data-track-label="Página Contacto - WhatsApp"
+                        class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider transition">
+                  <span>💬</span>
+                  <span>WhatsApp Oficial</span>
+                </button>
+              </div>
+              <div class="pt-2 border-t border-white/10 text-xs text-gray-300 space-y-1.5">
+                <p><strong class="text-[#D4AF37]">Dirección Letrada:</strong> Meryem Oulad</p>
+                <p><strong class="text-[#D4AF37]">Idiomas de atención:</strong> Español y Árabe (ES | العربية)</p>
+                <p><strong class="text-[#D4AF37]">Modalidad:</strong> Atención presencial con cita previa y asesoramiento telemático.</p>
+              </div>
+            </div>
+
+            <!-- BLOQUE DE PERFIL DE EMPRESA EN GOOGLE (SEO LOCAL OPTIMIZADO) -->
+            <div class="luxury-card rounded-2xl p-6 border border-[#D4AF37]/40 space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 rounded-lg bg-[#D4AF37]/20 text-[#D4AF37] flex items-center justify-center font-bold">G</span>
+                  <div>
+                    <span class="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">Estructura SEO Local</span>
+                    <h3 class="font-serif-legal text-base font-bold text-white">Perfil de Empresa en Google · Meryem Abogados</h3>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 text-[10px] font-bold">Ficha Optimizada</span>
+              </div>
+
+              <div class="p-4 rounded-xl bg-[#0C0C10] border border-white/10 space-y-3 text-xs">
+                <div>
+                  <span class="text-gray-400 block text-[11px]">Nombre Oficial del Perfil:</span>
+                  <strong class="text-white">Meryem Abogados · Meryem Oulad</strong>
+                </div>
+                <div>
+                  <span class="text-gray-400 block text-[11px]">Categorías de Posicionamiento Local:</span>
+                  <div class="flex flex-wrap gap-1.5 mt-1">
+                    <span class="px-2 py-0.5 rounded bg-[#D4AF37]/15 text-[#D4AF37] font-medium">Abogado de extranjería</span>
+                    <span class="px-2 py-0.5 rounded bg-white/5 text-gray-300">Abogado penalista</span>
+                    <span class="px-2 py-0.5 rounded bg-white/5 text-gray-300">Abogado de derecho de familia</span>
+                    <span class="px-2 py-0.5 rounded bg-white/5 text-gray-300">Abogado laboralista</span>
+                  </div>
+                </div>
+                <div>
+                  <span class="text-gray-400 block text-[11px]">Servicios Jurídicos Indexados:</span>
+                  <p class="text-gray-300 mt-0.5 leading-relaxed">
+                    Arraigos y Nacionalidad Española · Asistencia Penal y Juzgados · Divorcios y Convenio Regulador · Impugnación de Despidos y Conciliación SMAC.
+                  </p>
+                </div>
+                <div>
+                  <span class="text-gray-400 block text-[11px]">Atributos Destacados de la Ficha:</span>
+                  <p class="text-emerald-300 mt-0.5">✓ Atención en Español y Árabe · ✓ Cita online conectada al CRM · ✓ Respuesta &lt; 24h</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="corporate-footer"></div>
+
+  <script src="assets/js/crm-store.js"></script>
+  <script src="assets/js/layout.js"></script>
+</body>
+</html>
+

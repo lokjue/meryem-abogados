@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM Interno Privado · Gestión de Expedientes | Meryem Abogados</title>
+  <meta name="description" content="Panel privado del CRM interno de Meryem Abogados (Meryem Oulad). Embudo Kanban de 6 estados, notas de expediente, recordatorios <24h, 5 plantillas y analítica mensual." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="bg-[#08080A] text-[#F5F5F7] antialiased selection:bg-[#D4AF37] selection:text-[#08080A]">
+
+  <!-- Barra Superior Discreta de los 3 Entornos -->
+  <div id="environment-topbar"></div>
+
+  <!-- CABECERA DEL CRM INTERNO PRIVADO (crm.meryemabogados.com) -->
+  <header class="luxury-glass border-b border-[#D4AF37]/25 sticky top-0 z-30">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div id="crm-logo-slot"></div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-serif-legal text-lg sm:text-xl font-bold tracking-wider text-gold-gradient">
+              MERYEM ABOGADOS · CRM
+            </span>
+            <span class="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[10px] font-bold uppercase text-[#FFF5C0]">
+              Panel Privado
+            </span>
+          </div>
+          <p class="text-xs text-gray-400">
+            Dirección Letrada: <strong class="text-gray-200">Meryem Oulad</strong> · Centralización de consultas, expedientes y alertas &lt; 24h
+          </p>
+        </div>
+      </div>
+
+      <!-- Acciones Rápidas del CRM -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <button type="button" id="btn-open-new-lead"
+                class="bg-gold-gradient px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg transition flex items-center gap-1.5">
+          <span>＋</span>
+          <span>Registrar Consulta Manual (Teléfono / Recomendación)</span>
+        </button>
+
+        <button type="button" id="btn-reset-demo"
+                class="px-3 py-2.5 rounded-xl bg-[#14141B] hover:bg-[#1D1D26] border border-white/10 text-xs text-gray-300 transition"
+                title="Restaurar los expedientes de demostración iniciales">
+          ↻ Restaurar Demo
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 space-y-6 page-enter">
+
+    <!-- ======================================================================
+         1. PANEL SUPERIOR DE MÉTRICAS Y ANALÍTICA MENSUAL EN TIEMPO REAL
+         ====================================================================== -->
+    <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+      <!-- Métrica 1: Total de consultas recibidas en el mes -->
+      <div class="luxury-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Consultas Recibidas (Mes)</span>
+            <p class="text-3xl font-bold text-white mt-1" id="metric-total-mes">0</p>
+          </div>
+          <span class="w-10 h-10 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] text-lg">
+            📥
+          </span>
+        </div>
+        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+          <span class="text-gray-400">Pendientes de primer contacto:</span>
+          <span id="metric-nuevas-badge" class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">0 nuevas</span>
+        </div>
+      </div>
+
+      <!-- Métrica 2: Porcentaje de consultas que terminan en cita -->
+      <div class="luxury-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">% Consultas que Terminan en Cita</span>
+            <p class="text-3xl font-bold text-gold-gradient mt-1" id="metric-conversion-cita">0%</p>
+          </div>
+          <span class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg">
+            📅
+          </span>
+        </div>
+        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+          <span class="text-gray-400">Con cita / presupuesto / cliente:</span>
+          <span id="metric-con-cita-count" class="text-emerald-300 font-semibold">0 expedientes</span>
+        </div>
+      </div>
+
+      <!-- Métrica 3: Desglose del origen de cada consulta -->
+      <div class="luxury-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Desglose por Origen de Consulta</span>
+          <span class="text-[11px] text-[#D4AF37] font-semibold">5 Canales</span>
+        </div>
+        <div id="metric-origen-breakdown" class="space-y-1.5 text-xs"></div>
+      </div>
+
+      <!-- Métrica 4: Contador en tiempo real de clics en WhatsApp y Teléfono + Alertas <24h -->
+      <div class="luxury-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Clics en Tiempo Real &amp; SLA &lt; 24h</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5 my-2.5">
+          <div class="p-2.5 rounded-xl bg-[#0D0D12] border border-emerald-500/30 flex items-center justify-between">
+            <div>
+              <span class="block text-[10px] text-gray-400 uppercase">Clics WhatsApp</span>
+              <strong id="metric-clics-wa" class="text-xl text-emerald-400">0</strong>
+            </div>
+            <span class="text-lg">💬</span>
+          </div>
+          <div class="p-2.5 rounded-xl bg-[#0D0D12] border border-[#D4AF37]/30 flex items-center justify-between">
+            <div>
+              <span class="block text-[10px] text-gray-400 uppercase">Clics Teléfono</span>
+              <strong id="metric-clics-tel" class="text-xl text-[#D4AF37]">0</strong>
+            </div>
+            <span class="text-lg">📞</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
+          <span class="text-gray-400">Recordatorios &lt; 24h activos:</span>
+          <span id="metric-alertas-24h" class="px-2 py-0.5 rounded bg-[#D4AF37]/20 text-[#FFF5C0] font-bold">0 pendientes</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         2. BARRA DE FILTROS Y BÚSQUEDA DEL EMBUDO KANBAN
+         ====================================================================== -->
+    <section class="luxury-card rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center gap-3 flex-1">
+        <!-- Buscador -->
+        <div class="relative min-w-[240px] flex-1 max-w-md">
+          <input type="text" id="crm-search-input" class="luxury-input pl-9 py-2 text-xs"
+                 placeholder="Buscar por cliente, teléfono, código EXP-2026 o nota..." />
+          <span class="absolute left-3 top-2.5 text-gray-400 text-xs">🔍</span>
+        </div>
+
+        <!-- Filtro por Especialidad Jurídica -->
+        <select id="crm-filter-area" class="luxury-input w-auto py-2 text-xs">
+          <option value="">Todas las Áreas (4)</option>
+          <option value="Extranjería">Extranjería</option>
+          <option value="Derecho Penal">Derecho Penal</option>
+          <option value="Derecho de Familia">Derecho de Familia</option>
+          <option value="Derecho Laboral">Derecho Laboral</option>
+        </select>
+
+        <!-- Filtro por Origen -->
+        <select id="crm-filter-origen" class="luxury-input w-auto py-2 text-xs">
+          <option value="">Todos los Orígenes</option>
+          <option value="Web Corporativa">Web Corporativa</option>
+          <option value="Landing de Captación">Landing de Captación</option>
+          <option value="Contacto Telefónico Directo">Contacto Telefónico Directo</option>
+          <option value="Recomendación">Recomendación</option>
+          <option value="Ficha de Google">Ficha de Google</option>
+        </select>
+
+        <!-- Filtro de Garantía < 24h -->
+        <label class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#101015] border border-[#D4AF37]/30 text-xs cursor-pointer select-none">
+          <input type="checkbox" id="crm-filter-24h" class="accent-[#D4AF37]" />
+          <span class="text-[#FFF5C0] font-semibold">⚡ Solo con alerta &lt; 24h pendiente</span>
+        </label>
+      </div>
+
+      <div class="text-xs text-gray-400">
+        💡 <em>Arrastre cualquier tarjeta entre las 6 columnas o haga clic para abrir la <strong>Ficha Completa y las 5 Plantillas</strong>.</em>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. EMBUDO VISUAL KANBAN CON LOS 6 ESTADOS EXACTOS
+         ====================================================================== -->
+    <section>
+      <div id="kanban-board-container" class="kanban-board"></div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL INTERACTIVO: FICHA COMPLETA DE CLIENTE / EXPEDIENTE + 5 PLANTILLAS
+       ======================================================================== -->
+  <div id="client-file-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+    <div class="luxury-card rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-y-auto border-gold-glow shadow-2xl p-5 sm:p-8 space-y-6">
+
+      <!-- Cabecera de la Ficha -->
+      <div class="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-4">
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="modal-exp-code" class="px-2.5 py-0.5 rounded bg-[#D4AF37] text-[#08080A] text-xs font-bold font-mono">EXP-2026-001</span>
+            <span id="modal-exp-sla" class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-xs font-semibold">⚡ Garantía &lt; 24h</span>
+            <span id="modal-exp-date" class="text-xs text-gray-400">Fecha</span>
+          </div>
+          <h2 id="modal-client-title" class="font-serif-legal text-2xl sm:text-3xl font-bold text-white mt-2">
+            Nombre del Cliente
+          </h2>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" id="btn-delete-expediente"
+                  class="px-3 py-1.5 rounded-lg bg-red-950/50 border border-red-500/30 text-red-300 hover:bg-red-900/60 text-xs">
+            Eliminar
+          </button>
+          <button type="button" id="btn-close-client-modal"
+                  class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white flex items-center justify-center text-lg">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Cuerpo en 2 Columnas -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Columna Izquierda (7 cols): Datos del Expediente + 5 Plantillas de Respuesta Rápida -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- Bloque 1: Datos de Contacto, Área, Origen y Estado del Embudo -->
+          <form id="form-edit-client" class="p-5 rounded-2xl bg-[#0D0D12] border border-white/10 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-serif-legal text-sm uppercase tracking-wider text-[#D4AF37] font-bold">
+                1. Datos del Cliente y Estado en el Embudo
+              </h3>
+              <button type="submit" class="px-3.5 py-1.5 rounded-lg bg-[#D4AF37] text-[#08080A] text-xs font-bold hover:opacity-90 transition">
+                Guardar Cambios
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">Nombre completo</label>
+                <input type="text" id="edit-nombre" required class="luxury-input py-2 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">Teléfono / WhatsApp</label>
+                <input type="text" id="edit-telefono" required class="luxury-input py-2 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">Correo electrónico</label>
+                <input type="email" id="edit-email" class="luxury-input py-2 text-xs" />
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">Área de práctica jurídica</label>
+                <select id="edit-area" class="luxury-input py-2 text-xs">
+                  <option value="Extranjería">Extranjería</option>
+                  <option value="Derecho Penal">Derecho Penal</option>
+                  <option value="Derecho de Familia">Derecho de Familia</option>
+                  <option value="Derecho Laboral">Derecho Laboral</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] text-gray-400 mb-1">Origen de la consulta</label>
+                <select id="edit-origen" class="luxury-input py-2 text-xs">
+                  <option value="Web Corporativa">Web Corporativa</option>
+                  <option value="Landing de Captación">Landing de Captación</option>
+                  <option value="Contacto Telefónico Directo">Contacto Telefónico Directo</option>
+                  <option value="Recomendación">Recomendación</option>
+                  <option value="Ficha de Google">Ficha de Google</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[11px] text-[#D4AF37] font-bold mb-1">Estado en el Embudo Kanban (6 estados)</label>
+                <select id="edit-estado" class="luxury-input py-2 text-xs border-[#D4AF37]/60">
+                  <option value="Consulta nueva">1. Consulta nueva</option>
+                  <option value="Contactado">2. Contactado</option>
+                  <option value="Cita agendada">3. Cita agendada</option>
+                  <option value="Presupuesto enviado">4. Presupuesto enviado</option>
+                  <option value="Cliente">5. Cliente</option>
+                  <option value="Archivado">6. Archivado</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] text-gray-400 mb-1">Motivo de la consulta / Descripción del asunto</label>
+              <textarea id="edit-mensaje" rows="2" class="luxury-input py-2 text-xs"></textarea>
+            </div>
+          </form>
+
+          <!-- Bloque 2: 5 PLANTILLAS DE RESPUESTA RÁPIDA POR CORREO Y WHATSAPP -->
+          <div class="p-5 rounded-2xl bg-[#0D0D12] border border-[#D4AF37]/35 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">Respuesta Automática Personalizada</span>
+                <h3 class="font-serif-legal text-base font-bold text-white">
+                  2. Cinco Plantillas de Respuesta Rápida (WhatsApp y Correo)
+                </h3>
+              </div>
+              <span class="text-[11px] text-emerald-300 bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/30">
+                Autorrellena {nombre}, {area} y {expediente}
+              </span>
+            </div>
+
+            <div>
+              <label class="block text-xs text-gray-300 mb-1 font-medium">Seleccionar una de las 5 plantillas del despacho:</label>
+              <select id="template-selector" class="luxury-input py-2 text-xs"></select>
+            </div>
+
+            <div>
+              <label class="block text-[11px] text-gray-400 mb-1">Asunto del Correo:</label>
+              <input type="text" id="template-subject" class="luxury-input py-1.5 text-xs font-medium" />
+            </div>
+
+            <div>
+              <label class="block text-[11px] text-gray-400 mb-1">Mensaje pre-rellenado (editable antes de enviar):</label>
+              <textarea id="template-body" rows="6" class="luxury-input text-xs leading-relaxed"></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 pt-1">
+              <button type="button" id="btn-send-template-wa"
+                      class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition flex items-center justify-center gap-2">
+                <span>💬</span>
+                <span>Enviar en 1 Clic por WhatsApp Web</span>
+              </button>
+              <button type="button" id="btn-send-template-email"
+                      class="flex-1 bg-gold-gradient py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition flex items-center justify-center gap-2">
+                <span>✉️</span>
+                <span>Enviar en 1 Clic por Correo (mailto)</span>
+              </button>
+              <button type="button" id="btn-copy-template"
+                      class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-gray-200 transition">
+                📋 Copiar
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha (5 cols): Recordatorios <24h + Notas Internas del Expediente -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <!-- Bloque 3: Recordatorios y Tareas Asignables (< 24 Horas) -->
+          <div class="p-5 rounded-2xl bg-[#0D0D12] border border-white/10 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-serif-legal text-sm uppercase tracking-wider text-[#D4AF37] font-bold">
+                3. Recordatorios y Avisos (&lt; 24 Horas)
+              </h3>
+              <span class="text-[11px] text-gray-400">Control SLA</span>
+            </div>
+
+            <form id="form-add-reminder" class="flex gap-2">
+              <input type="text" id="new-reminder-title" required class="luxury-input py-2 text-xs flex-1"
+                     placeholder="Nueva tarea o aviso < 24h..." />
+              <select id="new-reminder-hours" class="luxury-input py-2 text-xs w-24">
+                <option value="4">4h</option>
+                <option value="12">12h</option>
+                <option value="24" selected>24h</option>
+                <option value="48">48h</option>
+              </select>
+              <button type="submit" class="px-3.5 py-2 rounded-lg bg-[#D4AF37] text-[#08080A] text-xs font-bold">
+                ＋
+              </button>
+            </form>
+
+            <div id="modal-reminders-list" class="space-y-2 max-h-48 overflow-y-auto"></div>
+          </div>
+
+          <!-- Bloque 4: Notas Internas del Despacho por Expediente -->
+          <div class="p-5 rounded-2xl bg-[#0D0D12] border border-white/10 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-serif-legal text-sm uppercase tracking-wider text-[#D4AF37] font-bold">
+                4. Notas Internas del Expediente
+              </h3>
+              <span class="text-[11px] text-gray-400">Autora: Meryem Oulad</span>
+            </div>
+
+            <form id="form-add-note" class="space-y-2">
+              <textarea id="new-note-content" rows="2" required class="luxury-input py-2 text-xs"
+                        placeholder="Escribir nueva anotación interna sobre llamadas, documentos o estrategia..."></textarea>
+              <button type="submit" class="w-full py-2 rounded-lg bg-[#181822] hover:bg-[#D4AF37] hover:text-[#08080A] border border-[#D4AF37]/40 text-xs font-bold text-[#D4AF37] transition">
+                ＋ Añadir Nota al Historial del Expediente
+              </button>
+            </form>
+
+            <div id="modal-notes-list" class="space-y-2.5 max-h-64 overflow-y-auto"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: REGISTRAR NUEVA CONSULTA MANUAL (TELÉFONO O RECOMENDACIÓN)
+       ======================================================================== -->
+  <div id="new-lead-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="luxury-card rounded-2xl max-w-lg w-full p-6 sm:p-8 border-gold-glow space-y-5">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold">Alta en Embudo Kanban</span>
+          <h3 class="font-serif-legal text-xl font-bold text-white">Registrar Consulta Manual</h3>
+        </div>
+        <button type="button" id="btn-close-new-lead" class="text-gray-400 hover:text-white">✕</button>
+      </div>
+
+      <form id="form-new-manual-lead" class="space-y-4">
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">Nombre completo del cliente *</label>
+          <input type="text" name="nombre_completo" required class="luxury-input text-xs" placeholder="Ej. Samira Alami / Antonio Vega" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-gray-300 mb-1">Teléfono / WhatsApp *</label>
+            <input type="tel" name="telefono" required class="luxury-input text-xs" placeholder="+34 600 00 00 00" />
+          </div>
+          <div>
+            <label class="block text-xs text-gray-300 mb-1">Correo electrónico</label>
+            <input type="email" name="email" class="luxury-input text-xs" placeholder="cliente@ejemplo.com" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-gray-300 mb-1">Área de práctica *</label>
+            <select name="area_practica" class="luxury-input text-xs">
+              <option value="Extranjería">Extranjería</option>
+              <option value="Derecho Penal">Derecho Penal</option>
+              <option value="Derecho de Familia">Derecho de Familia</option>
+              <option value="Derecho Laboral">Derecho Laboral</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-300 mb-1">Origen de la consulta *</label>
+            <select name="origen" class="luxury-input text-xs">
+              <option value="Contacto Telefónico Directo">Contacto Telefónico Directo</option>
+              <option value="Recomendación">Recomendación</option>
+              <option value="Ficha de Google">Ficha de Google</option>
+              <option value="Web Corporativa">Web Corporativa</option>
+              <option value="Landing de Captación">Landing de Captación</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">Estado inicial en el embudo</label>
+          <select name="estado" class="luxury-input text-xs">
+            <option value="Consulta nueva">1. Consulta nueva (Activa alerta &lt; 24h)</option>
+            <option value="Contactado">2. Contactado</option>
+            <option value="Cita agendada">3. Cita agendada</option>
+            <option value="Presupuesto enviado">4. Presupuesto enviado</option>
+            <option value="Cliente">5. Cliente</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">Resumen del asunto / Notas iniciales *</label>
+          <textarea name="mensaje" rows="3" required class="luxury-input text-xs"
+                    placeholder="Describa el motivo de la llamada o recomendación..."></textarea>
+        </div>
+        <button type="submit" class="w-full bg-gold-gradient py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
+          Guardar Expediente en el CRM
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/crm-store.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      let consultaActivaId = null;
+
+      const COLORES_ESTADO = {
+        'Consulta nueva': 'border-amber-400/50 text-amber-300 bg-amber-500/10',
+        'Contactado': 'border-sky-400/50 text-sky-300 bg-sky-500/10',
+        'Cita agendada': 'border-purple-400/50 text-purple-300 bg-purple-500/10',
+        'Presupuesto enviado': 'border-indigo-400/50 text-indigo-300 bg-indigo-500/10',
+        'Cliente': 'border-emerald-400/50 text-emerald-300 bg-emerald-500/10',
+        'Archivado': 'border-gray-500/40 text-gray-400 bg-gray-500/10'
+      };
+
+      const COLORES_AREA = {
+        'Extranjería': 'text-[#D4AF37] bg-[#D4AF37]/15 border-[#D4AF37]/30',
+        'Derecho Penal': 'text-rose-300 bg-rose-500/15 border-rose-500/30',
+        'Derecho de Familia': 'text-sky-300 bg-sky-500/15 border-sky-500/30',
+        'Derecho Laboral': 'text-emerald-300 bg-emerald-500/15 border-emerald-500/30'
+      };
+
+      function formatearFechaCorta(isoStr) {
+        if (!isoStr) return '';
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return isoStr;
+        return d.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: 'short',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
+      // 1. Renderizar Métricas Superiores
+      function renderizarMetricas() {
+        const m = window.MeryemCRM.obtenerMetricas();
+
+        document.getElementById('metric-total-mes').textContent = m.total_consultas_mes;
+        document.getElementById('metric-nuevas-badge').textContent = `${m.pendientes_nuevas} nuevas`;
+        document.getElementById('metric-conversion-cita').textContent = `${m.porcentaje_conversion_cita}%`;
+        document.getElementById('metric-con-cita-count').textContent = `${m.consultas_con_cita} de ${m.total_consultas_global} expedientes`;
+        document.getElementById('metric-clics-wa').textContent = m.clics_whatsapp;
+        document.getElementById('metric-clics-tel').textContent = m.clics_telefono;
+        document.getElementById('metric-alertas-24h').textContent = `${m.alertas_24h_pendientes} pendientes`;
+
+        const contenedorOrigen = document.getElementById('metric-origen-breakdown');
+        const total = Math.max(1, m.total_consultas_global);
+        contenedorOrigen.innerHTML = Object.entries(m.desglose_origen)
+          .map(([origen, cant]) => {
+            const pct = Math.round((cant / total) * 100);
+            return `
+              <div>
+                <div class="flex justify-between text-[11px] text-gray-300">
+                  <span class="truncate">${origen}</span>
+                  <span class="font-bold text-[#D4AF37]">${cant} (${pct}%)</span>
+                </div>
+                <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden mt-0.5">
+                  <div class="h-full bg-[#D4AF37]" style="width: ${pct}%"></div>
+                </div>
+              </div>
+            `;
+          })
+          .join('');
+      }
+
+      // 2. Obtener filtros activos de la barra
+      function obtenerFiltrosUI() {
+        return {
+          q: document.getElementById('crm-search-input').value,
+          area_practica: document.getElementById('crm-filter-area').value,
+          origen: document.getElementById('crm-filter-origen').value,
+          solo_alertas_24h: document.getElementById('crm-filter-24h').checked
+        };
+      }
+
+      // 3. Renderizar el Tablero Kanban con las 6 columnas exactas
+      function renderizarKanban() {
+        const board = document.getElementById('kanban-board-container');
+        const filtros = obtenerFiltrosUI();
+        const todas = window.MeryemCRM.obtenerConsultas(filtros);
+
+        board.innerHTML = window.MeryemCRM.ESTADOS_KANBAN.map((estado, index) => {
+          const tarjetas = todas.filter((c) => c.estado === estado);
+          const badgeClass = COLORES_ESTADO[estado] || '';
+
+          return `
+            <div class="kanban-column" data-kanban-state="${estado}">
+              <!-- Cabecera de Columna -->
+              <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-[#0C0C10] rounded-t-xl">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] font-mono text-gray-500">${index + 1}.</span>
+                  <h3 class="font-serif-legal text-xs font-bold uppercase tracking-wider text-white">${estado}</h3>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold border ${badgeClass}">
+                  ${tarjetas.length}
+                </span>
+              </div>
+
+              <!-- Contenedor de Tarjetas -->
+              <div class="kanban-cards-container">
+                ${
+                  tarjetas.length === 0
+                    ? `<div class="h-36 border border-dashed border-white/10 rounded-xl flex items-center justify-center text-xs text-gray-500 p-4 text-center">
+                         Sin expedientes en «${estado}»
+                       </div>`
+                    : tarjetas.map((c) => renderizarTarjetaKanban(c)).join('')
+                }
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        activarEventosKanban();
+        if (window.MeryemLayout && window.MeryemLayout.aplicarIdiomaDOM) {
+          window.MeryemLayout.aplicarIdiomaDOM(window.MeryemLayout.obtenerIdiomaActual());
+        }
+      }
+
+      function renderizarTarjetaKanban(c) {
+        const areaClass = COLORES_AREA[c.area_practica] || 'text-[#D4AF37] bg-[#D4AF37]/15';
+        const pendientesRec = (c.recordatorios || []).filter((r) => !r.completado).length;
+        const tieneAlerta24h = c.prioridad_24h || pendientesRec > 0;
+
+        return `
+          <div class="kanban-card" draggable="true" data-card-id="${c.id}">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="font-mono text-[11px] font-bold text-[#D4AF37]">${c.codigo_expediente}</span>
+              ${
+                tieneAlerta24h
+                  ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px] font-bold">
+                       ⚡ &lt;24h (${pendientesRec || 1})
+                     </span>`
+                  : `<span class="text-[10px] text-emerald-400">✓ Atendido</span>`
+              }
+            </div>
+
+            <h4 class="font-bold text-sm text-white leading-snug mb-1">${c.nombre_completo}</h4>
+            <p class="text-xs text-gray-400 mb-2">📞 ${c.telefono}</p>
+
+            <div class="flex flex-wrap gap-1.5 mb-2.5">
+              <span class="px-2 py-0.5 rounded border text-[10px] font-semibold ${areaClass}">
+                ${c.area_practica}
+              </span>
+              <span class="px-2 py-0.5 rounded bg-white/5 text-gray-300 text-[10px]">
+                ${c.origen}
+              </span>
+            </div>
+
+            <p class="text-[11px] text-gray-400 line-clamp-2 mb-3 leading-relaxed">
+              ${c.mensaje}
+            </p>
+
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-gray-400">
+              <span>🕒 ${formatearFechaCorta(c.fecha_creacion)}</span>
+              <span class="text-[#D4AF37] font-semibold hover:underline">Abrir ficha →</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 4. Drag & Drop y Clic en Tarjetas Kanban
+      function activarEventosKanban() {
+        const cards = document.querySelectorAll('.kanban-card');
+        const columns = document.querySelectorAll('.kanban-column');
+
+        cards.forEach((card) => {
+          card.addEventListener('dragstart', (e) => {
+            card.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', card.getAttribute('data-card-id'));
+          });
+
+          card.addEventListener('dragend', () => {
+            card.classList.remove('dragging');
+          });
+
+          card.addEventListener('click', () => {
+            const id = Number(card.getAttribute('data-card-id'));
+            abrirFichaCliente(id);
+          });
+        });
+
+        columns.forEach((col) => {
+          col.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            col.classList.add('drag-over');
+          });
+
+          col.addEventListener('dragleave', () => {
+            col.classList.remove('drag-over');
+          });
+
+          col.addEventListener('drop', (e) => {
+            e.preventDefault();
+            col.classList.remove('drag-over');
+            const id = Number(e.dataTransfer.getData('text/plain'));
+            const nuevoEstado = col.getAttribute('data-kanban-state');
+            if (id && nuevoEstado) {
+              window.MeryemCRM.cambiarEstado(id, nuevoEstado);
+              if (window.MeryemLayout) {
+                window.MeryemLayout.mostrarToast(
+                  `Expediente movido a «${nuevoEstado}»`,
+                  'El embudo Kanban y las métricas se han actualizado automáticamente.'
+                );
+              }
+            }
+          });
+        });
+      }
+
+      // 5. Abrir Modal de Ficha Completa de Cliente
+      function abrirFichaCliente(id) {
+        const c = window.MeryemCRM.obtenerConsultaPorId(id);
+        if (!c) return;
+        consultaActivaId = c.id;
+
+        document.getElementById('modal-exp-code').textContent = c.codigo_expediente;
+        document.getElementById('modal-exp-date').textContent = `Creado: ${formatearFechaCorta(c.fecha_creacion)}`;
+        document.getElementById('modal-client-title').textContent = c.nombre_completo;
+
+        const slaBadge = document.getElementById('modal-exp-sla');
+        if (c.prioridad_24h) {
+          slaBadge.className = 'px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-xs font-semibold';
+          slaBadge.textContent = '⚡ Pendiente primer contacto < 24h';
+        } else {
+          slaBadge.className = 'px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-semibold';
+          slaBadge.textContent = '✓ Atendido dentro de plazo';
+        }
+
+        document.getElementById('edit-nombre').value = c.nombre_completo || '';
+        document.getElementById('edit-telefono').value = c.telefono || '';
+        document.getElementById('edit-email').value = c.email || '';
+        document.getElementById('edit-area').value = c.area_practica || 'Extranjería';
+        document.getElementById('edit-origen').value = c.origen || 'Web Corporativa';
+        document.getElementById('edit-estado').value = c.estado || 'Consulta nueva';
+        document.getElementById('edit-mensaje').value = c.mensaje || '';
+
+        cargarSelectorPlantillas(c);
+        renderizarRecordatoriosModal(c);
+        renderizarNotasModal(c);
+
+        document.getElementById('client-file-modal').classList.remove('hidden');
+      }
+
+      // 6. Cargar las 5 Plantillas de Respuesta Rápida autorrellenadas
+      function cargarSelectorPlantillas(consulta) {
+        const selector = document.getElementById('template-selector');
+        const plantillas = window.MeryemCRM.obtenerPlantillas();
+
+        selector.innerHTML = plantillas
+          .map((p) => `<option value="${p.id}">${p.titulo}</option>`)
+          .join('');
+
+        // Preseleccionar plantilla acorde al área del cliente si existe
+        const sugerida = plantillas.find((p) => p.area_sugerida === consulta.area_practica);
+        if (sugerida) {
+          selector.value = sugerida.id;
+        } else {
+          selector.value = plantillas[0].id;
+        }
+
+        actualizarVistaPlantilla(selector.value, consulta);
+      }
+
+      function actualizarVistaPlantilla(plantillaId, consulta) {
+        const formateada = window.MeryemCRM.formatearPlantilla(plantillaId, consulta);
+        document.getElementById('template-subject').value = formateada.asunto;
+        document.getElementById('template-body').value = formateada.cuerpo;
+      }
+
+      // 7. Renderizar Recordatorios (< 24h) en el Modal
+      function renderizarRecordatoriosModal(consulta) {
+        const cont = document.getElementById('modal-reminders-list');
+        const recs = consulta.recordatorios || [];
+        if (recs.length === 0) {
+          cont.innerHTML = `<p class="text-xs text-gray-500 italic">No hay recordatorios asignados.</p>`;
+          return;
+        }
+
+        cont.innerHTML = recs
+          .map(
+            (r) => `
+            <div class="p-3 rounded-xl bg-[#14141C] border ${
+              r.completado ? 'border-white/5 opacity-60' : 'border-[#D4AF37]/40'
+            } flex items-start justify-between gap-2.5 text-xs">
+              <label class="flex items-start gap-2.5 cursor-pointer flex-1">
+                <input type="checkbox" data-toggle-rec="${r.id}" ${r.completado ? 'checked' : ''} class="mt-0.5 accent-[#D4AF37]" />
+                <div>
+                  <p class="${r.completado ? 'line-through text-gray-400' : 'text-white font-medium'}">${r.titulo}</p>
+                  <span class="text-[10px] text-[#D4AF37]">Límite: ${formatearFechaCorta(r.fecha_limite)}</span>
+                </div>
+              </label>
+              ${
+                r.es_alerta_24h
+                  ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold">&lt;24h</span>`
+                  : ''
+              }
+            </div>
+          `
+          )
+          .join('');
+
+        cont.querySelectorAll('[data-toggle-rec]').forEach((chk) => {
+          chk.addEventListener('change', () => {
+            const recId = Number(chk.getAttribute('data-toggle-rec'));
+            window.MeryemCRM.toggleRecordatorio(consulta.id, recId);
+            const actualizada = window.MeryemCRM.obtenerConsultaPorId(consulta.id);
+            renderizarRecordatoriosModal(actualizada);
+          });
+        });
+      }
+
+      // 8. Renderizar Notas Internas en el Modal
+      function renderizarNotasModal(consulta) {
+        const cont = document.getElementById('modal-notes-list');
+        const notas = consulta.notas || [];
+        if (notas.length === 0) {
+          cont.innerHTML = `<p class="text-xs text-gray-500 italic">Sin notas registradas aún.</p>`;
+          return;
+        }
+
+        cont.innerHTML = notas
+          .map(
+            (n) => `
+            <div class="p-3 rounded-xl bg-[#14141C] border border-white/10 text-xs space-y-1">
+              <div class="flex items-center justify-between text-[10px] text-[#D4AF37]">
+                <strong>✒️ ${n.autor}</strong>
+                <span class="text-gray-400">${formatearFechaCorta(n.fecha_creacion)}</span>
+              </div>
+              <p class="text-gray-200 leading-relaxed">${n.contenido}</p>
+            </div>
+          `
+          )
+          .join('');
+      }
+
+      // Inicialización de Eventos del CRM
+      document.addEventListener('DOMContentLoaded', function () {
+        const logoSlot = document.getElementById('crm-logo-slot');
+        if (logoSlot && window.MeryemLayout) {
+          logoSlot.innerHTML = window.MeryemLayout.obtenerEmblemaSVG('w-11 h-11');
+        }
+
+        renderizarMetricas();
+        renderizarKanban();
+
+        window.MeryemCRM.suscribir(() => {
+          renderizarMetricas();
+          renderizarKanban();
+        });
+
+        // Filtros en vivo
+        ['crm-search-input', 'crm-filter-area', 'crm-filter-origen', 'crm-filter-24h'].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('input', renderizarKanban);
+            el.addEventListener('change', renderizarKanban);
+          }
+        });
+
+        // Cerrar modal de ficha
+        const modalFicha = document.getElementById('client-file-modal');
+        document.getElementById('btn-close-client-modal').addEventListener('click', () => {
+          modalFicha.classList.add('hidden');
+        });
+
+        // Guardar edición de ficha de cliente
+        document.getElementById('form-edit-client').addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!consultaActivaId) return;
+
+          const nuevoEstado = document.getElementById('edit-estado').value;
+          const actual = window.MeryemCRM.obtenerConsultaPorId(consultaActivaId);
+
+          if (actual && actual.estado !== nuevoEstado) {
+            window.MeryemCRM.cambiarEstado(consultaActivaId, nuevoEstado);
+          }
+
+          window.MeryemCRM.actualizarConsulta(consultaActivaId, {
+            nombre_completo: document.getElementById('edit-nombre').value,
+            telefono: document.getElementById('edit-telefono').value,
+            email: document.getElementById('edit-email').value,
+            area_practica: document.getElementById('edit-area').value,
+            origen: document.getElementById('edit-origen').value,
+            estado: nuevoEstado,
+            mensaje: document.getElementById('edit-mensaje').value
+          });
+
+          abrirFichaCliente(consultaActivaId);
+          window.MeryemLayout.mostrarToast('Ficha actualizada', 'Los cambios del expediente se han guardado correctamente.');
+        });
+
+        // Eliminar expediente
+        document.getElementById('btn-delete-expediente').addEventListener('click', () => {
+          if (!consultaActivaId) return;
+          window.MeryemCRM.eliminarConsulta(consultaActivaId);
+          modalFicha.classList.add('hidden');
+          window.MeryemLayout.mostrarToast('Expediente eliminado', 'El registro se ha eliminado del CRM.');
+        });
+
+        // Cambio de plantilla de respuesta rápida
+        document.getElementById('template-selector').addEventListener('change', (e) => {
+          const c = window.MeryemCRM.obtenerConsultaPorId(consultaActivaId);
+          if (c) actualizarVistaPlantilla(e.target.value, c);
+        });
+
+        // Enviar plantilla por WhatsApp Web (1 clic)
+        document.getElementById('btn-send-template-wa').addEventListener('click', () => {
+          const c = window.MeryemCRM.obtenerConsultaPorId(consultaActivaId);
+          if (!c) return;
+          const cuerpo = document.getElementById('template-body').value;
+          const tel = (c.telefono || '').replace(/[^\d]/g, '');
+
+          window.MeryemCRM.registrarEvento('clic_whatsapp', 'crm_interno', '/crm', c.codigo_expediente);
+          if (c.estado === 'Consulta nueva') {
+            window.MeryemCRM.cambiarEstado(c.id, 'Contactado');
+          }
+          window.MeryemCRM.agregarNota(c.id, 'Respuesta rápida enviada por WhatsApp desde plantilla oficial.');
+          abrirFichaCliente(c.id);
+
+          const url = tel
+            ? `https://wa.me/${tel}?text=${encodeURIComponent(cuerpo)}`
+            : `https://wa.me/?text=${encodeURIComponent(cuerpo)}`;
+          window.open(url, '_blank', 'noopener');
+        });
+
+        // Enviar plantilla por Correo (mailto 1 clic)
+        document.getElementById('btn-send-template-email').addEventListener('click', () => {
+          const c = window.MeryemCRM.obtenerConsultaPorId(consultaActivaId);
+          if (!c) return;
+          const asunto = document.getElementById('template-subject').value;
+          const cuerpo = document.getElementById('template-body').value;
+          const destinatario = c.email || '';
+
+          if (c.estado === 'Consulta nueva') {
+            window.MeryemCRM.cambiarEstado(c.id, 'Contactado');
+          }
+          window.MeryemCRM.agregarNota(c.id, 'Respuesta rápida enviada por Correo Electrónico desde plantilla oficial.');
+          abrirFichaCliente(c.id);
+
+          window.location.href = `mailto:${encodeURIComponent(destinatario)}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+        });
+
+        // Copiar plantilla al portapapeles
+        document.getElementById('btn-copy-template').addEventListener('click', () => {
+          const cuerpo = document.getElementById('template-body').value;
+          navigator.clipboard.writeText(cuerpo).then(() => {
+            window.MeryemLayout.mostrarToast('Plantilla copiada', 'El texto personalizado se ha copiado al portapapeles.');
+          });
+        });
+
+        // Añadir Recordatorio < 24h
+        document.getElementById('form-add-reminder').addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!consultaActivaId) return;
+          const titulo = document.getElementById('new-reminder-title').value;
+          const horas = Number(document.getElementById('new-reminder-hours').value);
+          window.MeryemCRM.agregarRecordatorio(consultaActivaId, titulo, horas);
+          document.getElementById('new-reminder-title').value = '';
+          abrirFichaCliente(consultaActivaId);
+        });
+
+        // Añadir Nota Interna
+        document.getElementById('form-add-note').addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!consultaActivaId) return;
+          const contenido = document.getElementById('new-note-content').value;
+          window.MeryemCRM.agregarNota(consultaActivaId, contenido, 'Meryem Oulad');
+          document.getElementById('new-note-content').value = '';
+          abrirFichaCliente(consultaActivaId);
+        });
+
+        // Modal de Alta Manual
+        const newLeadModal = document.getElementById('new-lead-modal');
+        document.getElementById('btn-open-new-lead').addEventListener('click', () => {
+          newLeadModal.classList.remove('hidden');
+        });
+        document.getElementById('btn-close-new-lead').addEventListener('click', () => {
+          newLeadModal.classList.add('hidden');
+        });
+
+        document.getElementById('form-new-manual-lead').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const fd = new FormData(e.target);
+          const creada = window.MeryemCRM.crearConsulta({
+            nombre_completo: fd.get('nombre_completo'),
+            telefono: fd.get('telefono'),
+            email: fd.get('email'),
+            area_practica: fd.get('area_practica'),
+            origen: fd.get('origen'),
+            estado: fd.get('estado'),
+            mensaje: fd.get('mensaje')
+          });
+          e.target.reset();
+          newLeadModal.classList.add('hidden');
+          window.MeryemLayout.mostrarToast(
+            `Expediente ${creada.codigo_expediente} creado`,
+            `${creada.nombre_completo} se ha incorporado al embudo Kanban.`
+          );
+        });
+
+        // Restaurar datos de demostración
+        document.getElementById('btn-reset-demo').addEventListener('click', () => {
+          window.MeryemCRM.restaurarDatosIniciales();
+          window.MeryemLayout.mostrarToast(
+            'Datos de demostración restaurados',
+            'Se han restablecido los 6 expedientes iniciales y las 5 plantillas oficiales.'
+          );
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
+

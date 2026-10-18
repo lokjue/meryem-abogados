@@ -1,0 +1,291 @@
+/* ============================================================================
+   MERYEM ABOGADOS - SISTEMA DE DISEÑO DE LUJO (NEGRO PROFUNDO & DORADO)
+   Dirección Letrada: Meryem Oulad
+   Paleta Oficial: #08080A, #101014, #15151B | Dorado: #D4AF37 (#FFF5C0 -> #9A7409)
+   Soporte Bilingüe Completo: Español (LTR) y Árabe Jurídico (RTL)
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-obsidian: #08080A;
+  --bg-charcoal: #101014;
+  --bg-surface: #15151B;
+  --bg-surface-elevated: #1C1C24;
+  --gold-primary: #D4AF37;
+  --gold-light: #FFF5C0;
+  --gold-mid: #E5C158;
+  --gold-dark: #9A7409;
+  --text-primary: #F5F5F7;
+  --text-secondary: #A8A8B3;
+  --text-muted: #6E6E7A;
+  --border-gold: rgba(212, 175, 55, 0.24);
+  --border-gold-strong: rgba(212, 175, 55, 0.55);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-obsidian);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  scroll-behavior: smooth;
+}
+
+html[dir="rtl"] {
+  font-family: 'Noto Kufi Arabic', 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.75;
+}
+
+body {
+  background-color: var(--bg-obsidian);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(154, 116, 9, 0.05) 0%, transparent 45%);
+}
+
+/* Tipografía Institucional */
+.font-serif-legal {
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+html[dir="rtl"] .font-serif-legal {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+
+html[dir="rtl"] .tracking-widest,
+html[dir="rtl"] .tracking-wider,
+html[dir="rtl"] [class*="tracking-"] {
+  letter-spacing: 0 !important;
+}
+
+/* Ajustes RTL para menús desplegables y alineaciones */
+html[dir="rtl"] .group > div.absolute.left-0 {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+/* Textos y Degradados Dorados Metálicos */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 45%, #B68D1C 78%, #FFF5C0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #F5E18B 0%, #D4AF37 50%, #9A7409 100%);
+  color: #08080A;
+}
+
+.bg-gold-gradient:hover {
+  background: linear-gradient(135deg, #FFF5C0 0%, #E2BE46 50%, #B38811 100%);
+  box-shadow: 0 10px 30px -5px rgba(212, 175, 55, 0.4);
+}
+
+.border-gold-subtle {
+  border: 1px solid var(--border-gold);
+}
+
+.border-gold-glow {
+  border: 1px solid var(--border-gold-strong);
+  box-shadow: 0 0 28px rgba(212, 175, 55, 0.14);
+}
+
+/* Tarjetas Institucionales de Lujo */
+.luxury-card {
+  background: linear-gradient(180deg, rgba(21, 21, 27, 0.92) 0%, rgba(16, 16, 20, 0.98) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  transition: transform 0.45s var(--ease-luxury), border-color 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury);
+}
+
+.luxury-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.52);
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.8), 0 0 24px rgba(212, 175, 55, 0.14);
+}
+
+.luxury-glass {
+  background: rgba(16, 16, 20, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Imágenes Jurídicas con Superposición Oscura Elegante */
+.legal-image-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+.legal-image-frame img {
+  transition: transform 0.8s var(--ease-luxury), filter 0.6s var(--ease-luxury);
+  filter: contrast(1.05) brightness(0.84);
+}
+
+.legal-image-frame:hover img {
+  transform: scale(1.04);
+  filter: contrast(1.08) brightness(0.92);
+}
+
+.legal-image-overlay {
+  background: linear-gradient(180deg, rgba(8, 8, 10, 0.25) 0%, rgba(8, 8, 10, 0.88) 100%);
+}
+
+/* Animaciones de Entrada Multipágina (Cubic-Bezier) */
+@keyframes pageFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+}
+
+.page-enter {
+  animation: pageFadeInUp 0.65s var(--ease-luxury) forwards;
+}
+
+.stagger-1 { animation: pageFadeInUp 0.65s var(--ease-luxury) 0.08s both; }
+.stagger-2 { animation: pageFadeInUp 0.65s var(--ease-luxury) 0.16s both; }
+.stagger-3 { animation: pageFadeInUp 0.65s var(--ease-luxury) 0.24s both; }
+.stagger-4 { animation: pageFadeInUp 0.65s var(--ease-luxury) 0.32s both; }
+
+.pulse-gold {
+  animation: goldPulse 2.4s infinite;
+}
+
+/* Formularios de Lujo */
+.luxury-input {
+  width: 100%;
+  background-color: #0B0B0F;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: #F5F5F7;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.925rem;
+  transition: border-color 0.3s var(--ease-luxury), box-shadow 0.3s var(--ease-luxury);
+  outline: none;
+}
+
+.luxury-input:focus {
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.16);
+}
+
+.luxury-input::placeholder {
+  color: #686875;
+}
+
+/* Embudo Kanban del CRM */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(280px, 1fr));
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.kanban-column {
+  background: rgba(16, 16, 20, 0.92);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+  max-height: 75vh;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.kanban-column.drag-over {
+  border-color: #D4AF37;
+  background: rgba(212, 175, 55, 0.06);
+}
+
+.kanban-cards-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.kanban-card {
+  background: #15151B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid #D4AF37;
+  border-radius: 0.625rem;
+  padding: 0.9rem;
+  cursor: pointer;
+  transition: all 0.28s var(--ease-luxury);
+}
+
+html[dir="rtl"] .kanban-card {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 3px solid #D4AF37;
+}
+
+.kanban-card:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.75);
+}
+
+.kanban-card.dragging {
+  opacity: 0.45;
+  transform: scale(0.98);
+}
+
+/* Scrollbar Personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08080A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262630;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* Divisor Dorado Ornamental */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.6) 50%, transparent 100%);
+}
